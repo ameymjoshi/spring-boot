@@ -3,8 +3,13 @@ package io.amey.myapp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "task")
 public class Task {
 
+    @Id
     private int id;
     private String title;
     private String longDesc;
@@ -12,10 +17,10 @@ public class Task {
     private long remindDate;
     private String assignedTo;
     private List<String> labels = new ArrayList<String>();
-    private List<String> state = new ArrayList<String>();
+    private String state;
     
     public Task(int id, String title, String longDesc, long dueDate, long remindDate, String assignedTo,
-            List<String> labels, List<String> state) {
+            List<String> labels, String state) {
         this.id = id;
         this.title = title;
         this.longDesc = longDesc;
@@ -30,6 +35,8 @@ public class Task {
         this.id = id;
         this.title = title;
     }
+
+    public Task() {}
 
     @Override
     public String toString() {
@@ -94,11 +101,11 @@ public class Task {
         this.labels = labels;
     }
 
-    public List<String> getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(List<String> state) {
+    public void setState(String state) {
         this.state = state;
     }
 
